@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-surface-50: oklch(0.985 0.005 260);
+  --color-surface-100: oklch(0.96 0.015 260);
+  --color-surface-200: oklch(0.91 0.02 260);
+  --color-surface-800: oklch(0.22 0.04 260);
+  --color-surface-900: oklch(0.16 0.045 260);
+  --color-surface-950: oklch(0.12 0.05 260);
+
+  --color-accent: oklch(0.62 0.19 250);
+  --color-accent-soft: oklch(0.72 0.14 250);
+  --color-mint: oklch(0.72 0.14 165);
+  --color-coral: oklch(0.65 0.2 25);
+
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-sans);
+  @apply bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen;
+}
+
+.glass {
+  @apply bg-white/80 dark:bg-slate-900/70 backdrop-blur-md border border-slate-200/80 dark:border-slate-800/80;
+}

@@ -1,0 +1,26 @@
+{
+  "name": "fintrack",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,web -c blue,green \"npm run dev -w @fintrack/api\" \"npm run dev -w @fintrack/web\"",
+    "dev:api": "npm run dev -w @fintrack/api",
+    "dev:web": "npm run dev -w @fintrack/web",
+    "build": "npm run build -w @fintrack/api && npm run build -w @fintrack/web",
+    "lint": "npm run lint -w @fintrack/api && npm run lint -w @fintrack/web",
+    "test": "npm run test -w @fintrack/api",
+    "db:generate": "npm run prisma -w @fintrack/api -- generate",
+    "db:migrate": "npm run prisma -w @fintrack/api -- migrate dev",
+    "db:push": "npm run prisma -w @fintrack/api -- db push"
+  },
+  "devDependencies": {
+    "@prisma/client": "^7.6.0",
+    "concurrently": "^9.1.2",
+    "prisma": "^7.6.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
