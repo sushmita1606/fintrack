@@ -14,11 +14,13 @@ export async function dashboardSummary(userId: string, year: number, month: numb
       by: ["type"],
       where: { userId, occurredAt: { gte: start, lt: end } },
       _sum: { amount: true },
+      orderBy: { type: 'asc' }, // Added this
     }),
     prisma.transaction.groupBy({
       by: ["categoryId"],
       where: { userId, type: "expense", occurredAt: { gte: start, lt: end } },
       _sum: { amount: true },
+      orderBy: { categoryId: 'asc' }, // Added this
     }),
     prisma.transaction.groupBy({
       by: ["type"],
@@ -30,13 +32,14 @@ export async function dashboardSummary(userId: string, year: number, month: numb
         },
       },
       _sum: { amount: true },
+      orderBy: { type: 'asc' }, // Added this
     }),
   ]);
 
-  const income = Number(monthAgg.find((x) => x.type === "income")?._sum.amount ?? 0);
-  const expense = Number(monthAgg.find((x) => x.type === "expense")?._sum.amount ?? 0);
-  const prevIncome = Number(prevAgg.find((x) => x.type === "income")?._sum.amount ?? 0);
-  const prevExpense = Number(prevAgg.find((x) => x.type === "expense")?._sum.amount ?? 0);
+  const income = Number(monthAgg.find((x) => x.type === "income")?._sum?.amount ?? 0);
+  const expense = Number(monthAgg.find((x) => x.type === "expense")?._sum?.amount ?? 0);
+  const prevIncome = Number(prevAgg.find((x) => x.type === "income")?._sum?.amount ?? 0);
+  const prevExpense = Number(prevAgg.find((x) => x.type === "expense")?._sum?.amount ?? 0);
 
   const categoryIds = categoryAgg.map((c) => c.categoryId).filter(Boolean) as string[];
   const cats = await prisma.category.findMany({
@@ -51,7 +54,7 @@ export async function dashboardSummary(userId: string, year: number, month: numb
       categoryId: c.categoryId as string,
       name: catMap.get(c.categoryId as string)?.name ?? "Unknown",
       color: catMap.get(c.categoryId as string)?.color ?? null,
-      total: Number(c._sum.amount ?? 0),
+      total: Number(c._sum?.amount ?? 0),
     }))
     .sort((a, b) => b.total - a.total);
 
