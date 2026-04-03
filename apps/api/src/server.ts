@@ -1,7 +1,6 @@
-import { createApp } from "./app.js";
-import { env } from "./config/env.js";
+const port = process.env.PORT || 10000;
 
-const app = createApp();
-app.listen(env.PORT, () => {
-  console.log(`FinTrack API listening on ${env.PORT}`);
+// '0.0.0.0' is mandatory on Render to accept public traffic
+app.listen(Number(port), '0.0.0.0', () => {
+  console.log(`FinTrack API listening on ${port}`);
 });

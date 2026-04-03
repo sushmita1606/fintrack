@@ -20,6 +20,7 @@ import { savingsGoalRouter } from "./routes/savingsGoal.routes.js";
 
 export function createApp() {
   const app = express();
+app.set('trust proxy', 1);
   app.disable("x-powered-by");
 
   app.use((pino as any)({ level: env.NODE_ENV === "development" ? "debug" : "info" }));
