@@ -75,11 +75,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(res.user);
   }, []);
 
-  const logout = useCallback(() => {
+    const logout = useCallback(() => {
+    // 1. Clear the tokens from storage
     setToken(null);
     setTok(null);
     setUser(null);
+    
+    // 2. Clear ALL local data to be safe
+    localStorage.clear();
+    sessionStorage.clear();
+
+    // 3. Force a hard reload to clear the React memory/cache
+    // This ensures User 2 starts with a 100% clean state
+    window.location.href = "/login";
   }, []);
+
 
   const value = useMemo(
     () => ({ user, token, loading, login, register, logout }),
