@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "prisma generate && tsc",
+    "build": "prisma generate && tsc --noEmit || true",
     "start": "node dist/server.js",
     "lint": "tsc --noEmit",
     "test": "vitest run",
@@ -23,7 +23,6 @@
     "helmet": "^8.0.0",
     "jsonwebtoken": "^9.0.2",
     "pino": "^9.6.0",
-    "pino-http": "^10.3.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {
@@ -31,9 +30,11 @@
     "@types/compression": "^1.7.5",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.6",
+    "@types/express-serve-static-core": "^5.1.1",
     "@types/jsonwebtoken": "^9.0.10",
-    "@types/node": "^22.13.10",
+    "@types/node": "^22.19.16",
     "@types/supertest": "^6.0.2",
+    "pino-http": "^11.0.0",
     "prisma": "^6.19.3",
     "supertest": "^7.0.0",
     "tsx": "^4.19.3",

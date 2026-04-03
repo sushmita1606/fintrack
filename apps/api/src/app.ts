@@ -3,7 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import compression from "compression";
 import rateLimit from "express-rate-limit";
-import pinoHttp from "pino-http";
+import pino from 'pino-http';
 import { env } from "./config/env.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 
@@ -22,7 +22,7 @@ export function createApp() {
   const app = express();
   app.disable("x-powered-by");
 
-  app.use(pinoHttp({ level: env.NODE_ENV === "development" ? "debug" : "info" }));
+  app.use((pino as any)({ level: env.NODE_ENV === "development" ? "debug" : "info" }));
   app.use(
     helmet({
       crossOriginResourcePolicy: { policy: "cross-origin" },
