@@ -15,10 +15,13 @@
     "db:migrate": "npm run prisma -w @fintrack/api -- migrate dev",
     "db:push": "npm run prisma -w @fintrack/api -- db push"
   },
+  "dependencies": {
+    "pino-http": "^11.0.0"
+  },
   "devDependencies": {
-    "@prisma/client": "^7.6.0",
+    "@prisma/client": "^6.19.3",
     "concurrently": "^9.1.2",
-    "prisma": "^7.6.0"
+    "prisma": "^6.19.3"
   },
   "engines": {
     "node": ">=20"
